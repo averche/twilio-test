@@ -49,14 +49,15 @@ func main() {
 	}
 
 	for _, k := range keys {
+		fmt.Println("created @", *k.DateCreated, " => ", *k.FriendlyName, " sid ", *k.Sid)
+
 		if strings.HasPrefix(*k.FriendlyName, "vault-secrets") {
 			err := client.Api.DeleteKey(*k.Sid, &twilio_api.DeleteKeyParams{})
 			if err != nil {
 				fmt.Println(err)
 			} else {
-				fmt.Println("deleted", *k.FriendlyName)
+				fmt.Println("deleted", *k.FriendlyName, "sid", *k.Sid)
 			}
 		}
-		fmt.Println("found", *k.FriendlyName)
 	}
 }
